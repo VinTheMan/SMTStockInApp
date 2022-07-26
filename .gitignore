@@ -10,3 +10,5 @@ yarn-error.log
 
 # files that required by Vetur
 tsconfig.json
+
+out/
