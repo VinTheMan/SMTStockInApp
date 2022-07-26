@@ -1,22 +1,14 @@
 {
-    "private": true,
-    "main": "main.js",
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production",
-        "start": "electron ."
-    },
-    "devDependencies": {
-        "axios": "^0.25",
-        "electron": "^18.2.0",
-        "electron-packager": "^15.5.1",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
-    }
+  "name": "SMTStockInApp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://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@github.com/VinTheMan/SMTStockInApp.git",
+  "author": "Vincent6 Yeh <Vincent6_Yeh@pegatroncorp.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^19.0.9"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
 }

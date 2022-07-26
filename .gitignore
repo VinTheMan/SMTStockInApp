@@ -1,17 +1,12 @@
-#/node_modules
-/node_modules/electron
-/node_modules/electron-packager
-/public/hot
-/public/storage
-/storage/*.key
-/SMTLaradock
-#/vendor
-#.env
+/node_modules
+# /vendor
 .env.backup
 .phpunit.result.cache
+docker-compose.override.yml
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/.idea
-/.vscode
+
+# files that required by Vetur
+tsconfig.json
