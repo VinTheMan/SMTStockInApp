@@ -13,11 +13,16 @@ export default {
     };
   },
   mounted() {
-    // do nothing
+    // const admintemplateScript = document.createElement("script");
+    // admintemplateScript.setAttribute("defer", "");
+    // admintemplateScript.setAttribute("src", "/app.js");
+    // document.head.appendChild(admintemplateScript);
   },
   components: {
     SidebarComponent,
     NavbarComponent,
   },
-  methods: {},
+  methods: {
+    // do nothing for now
+  },
 };
