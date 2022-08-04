@@ -8,8 +8,6 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       preload: "src/preload.ts",
-      // Or, for multiple preload files:
-      // preload: { preload: 'src/preload.js', otherPreload: 'src/preload2.js' },
       nodeIntegration: true,
       chainWebpackMainProcess: (config) => {
         config.module
@@ -22,6 +20,15 @@ module.exports = {
             plugins: ["@babel/plugin-proposal-class-properties"],
           });
       },
+    },
+    i18n: {
+      locale: "en",
+      fallbackLocale: "en",
+      localeDir: "locales",
+      enableLegacy: true,
+      runtimeOnly: false,
+      compositionOnly: true,
+      fullInstall: true,
     },
   },
 };

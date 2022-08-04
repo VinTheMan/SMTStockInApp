@@ -1,16 +1,17 @@
 <template>
   <div>
-    <span style="color: white">ip:</span>
+    <p>message: {{ $t("messages.hello", { name: "Vincent" }) }}</p>
+    <span>ip:</span>
     <input type="text" v-model="ip" />
     <br />
-    <span style="color: white">port:</span>
+    <span>port:</span>
     <input type="text" v-model="port" />
     <br />
     <button @click="establishConnect">Establish Connection</button>&nbsp;&nbsp;
     <button @click="closeConnection">Disconnect</button>
     <br />
     <br />
-    <span style="color: white">message:</span>
+    <span>message:</span>
     <input type="text" v-model="message" />
     <button @click="sendMessage">send</button>
     <br />
@@ -19,9 +20,9 @@
 
 <script src="../js/TCP_Reader.ts">
 export default {
-    name: 'tcp-reader',
-    props: {
-        msg: String
-    }
+  name: 'tcp-reader',
+  props: {
+    msg: String
+  }
 }
 </script>

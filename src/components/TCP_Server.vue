@@ -18,9 +18,9 @@
 
 <script src="../js/TCP_Server.ts">
 export default {
-    name: 'tcp-server',
-    props: {
-        msg: String
-    }
+  name: 'tcp-server',
+  props: {
+    msg: String
+  }
 }
 </script>

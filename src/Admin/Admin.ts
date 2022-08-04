@@ -2,6 +2,8 @@
 // import Vue from "vue";
 import SidebarComponent from "../components/Sidebar/Sidebar_index.vue";
 import NavbarComponent from "../components/Navbar/Navbar_index.vue";
+import TcpReader from "../components/TCP_Client.vue";
+import TcpServer from "../components/TCP_Server.vue";
 // const net = require("net");
 
 export default {
@@ -13,14 +15,13 @@ export default {
     };
   },
   mounted() {
-    // const admintemplateScript = document.createElement("script");
-    // admintemplateScript.setAttribute("defer", "");
-    // admintemplateScript.setAttribute("src", "/app.js");
-    // document.head.appendChild(admintemplateScript);
+    // do nothing for now
   },
   components: {
     SidebarComponent,
     NavbarComponent,
+    TcpReader,
+    TcpServer,
   },
   methods: {
     // do nothing for now

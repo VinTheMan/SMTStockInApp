@@ -5,6 +5,7 @@
     "strict": true,
     "jsx": "preserve",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
     "useUnknownInCatchVariables": false,

@@ -1,5 +1,10 @@
 // import { createApp } from 'vue';
 import { createApp } from "vue/dist/vue.esm-bundler";
+import { createI18n } from "vue-i18n";
+import enUS from "./locales/en-US.json";
+import zhTW from "./locales/zh-TW.json";
+import zhCN from "./locales/zh-CN.json";
+
 import App from "./App.vue";
 
 /* import the fontawesome core */
@@ -9,8 +14,6 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 /* import specific icons */
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 
-import TCPReader from "./components/TCP_Client.vue";
-import TCPServer from "./components/TCP_Server.vue";
 import AdminTemplate from "./Admin/layout_index.vue";
 import router from "./router";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,14 +24,25 @@ import "../src/Admin/Admin.css";
 /* add icons to the library */
 library.add(faBell);
 
+// Type-define 'en-US' as the master schema for the resource
+type MessageSchema = typeof enUS;
+
+const i18n = createI18n<[MessageSchema], "en-US" | "zh-TW" | "zh-CN">({
+  locale: "zh-CN",
+  messages: {
+    "en-US": enUS,
+    "zh-CN": zhCN,
+    "zh-TW": zhTW,
+  },
+});
+
 createApp({
   components: {
     app: App,
     "font-awesome-icon": FontAwesomeIcon,
     "admin-template": AdminTemplate,
-    "tcp-reader": TCPReader,
-    "tcp-server": TCPServer,
   },
 })
+  .use(i18n)
   .use(router)
   .mount("#mountingPoint");
