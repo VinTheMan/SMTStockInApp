@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { app, protocol, BrowserWindow } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
-import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
+import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 // import { text } from 'body-parser'
 const isDevelopment = process.env.NODE_ENV !== "production";
 const path = require("path");
@@ -68,7 +68,7 @@ app.on("ready", async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
     try {
-      await installExtension(VUEJS3_DEVTOOLS);
+      await installExtension(VUEJS_DEVTOOLS);
       // await installExtension(VUEJS3_DEVTOOLS, {
       //   loadExtensionOptions: {
       //     allowFileAccess: true,

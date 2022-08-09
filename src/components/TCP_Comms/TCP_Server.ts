@@ -1,5 +1,10 @@
+/* eslint-disable */
 "use strict";
 import * as net from "net";
+const { networkInterfaces } = require("os");
+const nets = networkInterfaces();
+const results = Object.create(null); // Or just '{}', an empty object
+
 let socketServer;
 export default {
   data() {
@@ -11,16 +16,40 @@ export default {
     };
   },
   mounted() {
+    let nrName = "" ;
+    for (const name of Object.keys(nets)) { 
+      for (const nr of nets[name]) { // find self ipv4 address
+        // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
+        // 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6
+        const familyV4Value = typeof nr.family === "string" ? "IPv4" : 4;
+        if (nr.family === familyV4Value && !nr.internal) {
+          if (!results[name]) {
+            results[name] = [];
+          } // if
+          results[name].push(nr.address);
+
+          if( nrName === "" ) {
+            nrName = name;
+          } // if
+
+          console.log(results); // test
+        } // if
+      } // for
+    } // for
+
     const server = new net.Server();
     socketServer = server;
+
     socketServer.on("listening", () => {
       console.log("We are now open and start listening on port :" + this.port);
-      this.address = socketServer.address().address;
+      this.address = results[nrName][0];
       this.family = socketServer.address().family;
     });
 
     socketServer.on("close", () => {
       console.log("All connections are closed !");
+      this.address = "Not Opened";
+      this.family = "Not Opened";
     });
 
     socketServer.on("connection", (client) => {

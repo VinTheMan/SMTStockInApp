@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script src="../js/TCP_Reader.ts">
+<script src="./TCP_Client.ts">
 export default {
   name: 'tcp-reader',
   props: {

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <span style="color: white">address:</span>
+    <span>address:</span>
     <input type="text" v-model="address" disabled />
+    <!-- <br />
+    <span>family:</span>
+    <input type="text" v-model="family" disabled /> -->
     <br />
-    <span style="color: white">family:</span>
-    <input type="text" v-model="family" disabled />
-    <br />
-    <span style="color: white">port:</span>
+    <span>port:</span>
     <input type="text" v-model="port" />
     <br />
     <button @click="startListening">Start Listening</button>&nbsp;&nbsp;
@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script src="../js/TCP_Server.ts">
+<script src="./TCP_Server.ts">
 export default {
   name: 'tcp-server',
   props: {

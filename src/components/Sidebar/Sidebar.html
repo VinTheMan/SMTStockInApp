@@ -8,10 +8,10 @@
                 <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
                     <div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden scroll;">
                         <div class="simplebar-content" style="padding: 0px;">
-                            <a class="sidebar-brand" href="">
+                            <router-link class="sidebar-brand" to="/">
                                 <span class="sidebar-brand-text align-middle">
-                                     .websiteName
-                                    <!-- <sup><small class="badge bg-primary text-uppercase">Pro</small></sup> -->
+                                    SMT
+                                    <sup><small class="badge bg-primary text-uppercase">Pro</small></sup>
                                 </span>
                                 <svg class="sidebar-brand-icon align-middle" width="32px" height="32px"
                                     viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5"
@@ -21,14 +21,12 @@
                                     <path d="M20 12L12 16L4 12"></path>
                                     <path d="M20 16L12 20L4 16"></path>
                                 </svg>
-                            </a>
-
-
+                            </router-link>
                             <ul class="sidebar-nav">
                                 <!-- <li class="sidebar-header">
                                     Pages
                                 </li> -->
-                                <li class="sidebar-item">
+                                <!-- <li class="sidebar-item">
                                     <a class="sidebar-link" href="#">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-sliders align-middle me-2"
@@ -37,42 +35,34 @@
                                                 d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z" />
                                         </svg>
                                         <span class="align-middle"> .dashboard</span>
-                                        <!-- <span class="sidebar-badge badge bg-primary">Pro</span> -->
+                                        <span class="sidebar-badge badge bg-primary">Pro</span>
                                     </a>
-                                </li>
-                                <li class="sidebar-item">
+                                </li> -->
+                                <li class="sidebar-item" :class="{active: active_el.includes('test')}">
                                     <a data-bs-target="#basicInfo" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed" aria-expanded="false" id="myCollapsible">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-info-circle align-middle me-2"
+                                            fill="currentColor" class="bi bi-sliders align-middle me-2"
                                             viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                            <path
-                                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                            <path fill-rule="evenodd"
+                                                d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z" />
                                         </svg>
-                                        <span class="align-middle"> .basicInfo</span>
+                                        <span class="align-middle">Tests</span>
                                     </a>
                                     <ul id="basicInfo" class="sidebar-dropdown list-unstyled collapse"
                                         data-bs-parent="#sidebar">
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                basicInfoLang.basicInfo</a>
+                                        <li class="sidebar-item" :class="{active: active_el.includes('test_getData')}">
+                                            <router-link class="sidebar-link" to="/test/getScannerData">As Station
+                                            </router-link>
                                         </li>
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                basicInfoLang.newMats</a>
+                                        <li class="sidebar-item" :class="{active: active_el.includes('test_sendData')}">
+                                            <router-link class="sidebar-link" to="/test/sendData">As Scanner
+                                            </router-link>
                                         </li>
-                                        <li class="sidebar-item"><a
-                                                class="sidebar-link" href="">
-                                                basicInfoLang.matsInfo</a></li>
-
                                     </ul>
                                 </li>
 
-                                <li class="sidebar-item active">
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#barcodePages" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -84,21 +74,21 @@
                                     </a>
                                     <ul id="barcodePages" class="sidebar-dropdown list-unstyled collapse"
                                         data-bs-parent="#sidebar">
-                                        <li class="sidebar-item active">
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 .barcode_generator</a>
+                                                .barcode_generator</a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 .isnBarcode</a>
+                                                .isnBarcode</a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 .locBarcode</a>
+                                                .locBarcode</a>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="sidebar-item">
+                                </li> -->
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#inbound" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -116,8 +106,7 @@
                                                 inboundpageLang.new
                                             </a>
                                         </li>
-                                        <li
-                                            class="sidebar-item">
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
                                                 inboundpageLang.search
                                             </a>
@@ -127,22 +116,21 @@
                                                 inboundpageLang.searchstock
                                             </a>
                                         </li>
-                                        <li
-                                            class="sidebar-item">
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
                                                 inboundpageLang.locationchange')
                                             </a>
                                         </li>
                                         <li class="sidebar-item ">
                                             <a class="sidebar-link" href="">
-                                                 inboundpageLang.stockupload 
+                                                inboundpageLang.stockupload
                                             </a>
                                         </li>
 
                                     </ul>
-                                </li>
-                   
-                                <li class="sidebar-item">
+                                </li> -->
+
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#outbound" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -151,52 +139,50 @@
                                             <path
                                                 d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562A.5.5 0 0 0 1.884 9h12.234a.5.5 0 0 0 .496-.438L14.933 6zM3.809.563A1.5 1.5 0 0 1 4.981 0h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393zm.941.83.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438l.32-2.562H10.45a2.5 2.5 0 0 1-4.9 0H1.066z" />
                                         </svg>
-                                        <span class="align-middle">  .outbound </span>
-                                        <!-- <span class="sidebar-badge badge bg-primary">Pro</span> -->
+                                        <span class="align-middle"> .outbound </span>
+                                        <span class="sidebar-badge badge bg-primary">Pro</span>
                                     </a>
                                     <ul id="outbound" class="sidebar-dropdown list-unstyled collapse"
                                         data-bs-parent="#sidebar">
-                                        <li
-                                            class="sidebar-item">
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 outboundpageLang.pick 
+                                                outboundpageLang.pick
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 outboundpageLang.picklist 
+                                                outboundpageLang.picklist
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 outboundpageLang.pickrecord 
-                                            </a>
-                                        </li>
-
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                 outboundpageLang.back 
+                                                outboundpageLang.pickrecord
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 outboundpageLang.backlist 
+                                                outboundpageLang.back
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 outboundpageLang.backrecord 
+                                                outboundpageLang.backlist
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                outboundpageLang.backrecord
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
 
-                                <li class="sidebar-item">
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#monthly" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -205,71 +191,65 @@
                                             <path
                                                 d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                                         </svg>
-                                        <span class="align-middle">  .monthly </span>
-                                        <!-- <span class="sidebar-badge badge bg-primary">Pro</span> -->
+                                        <span class="align-middle"> .monthly </span>
+                                        <span class="sidebar-badge badge bg-primary">Pro</span>
                                     </a>
                                     <ul id="monthly" class="sidebar-dropdown list-unstyled collapse"
                                         data-bs-parent="#sidebar">
-                                        <li
-                                            class="sidebar-item">
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                  .isnConsumeAdd 
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                  .isnConsumeUpdate 
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                  .standAdd 
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                  .standUpdate 
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                  .importMonthlyData 
+                                                .isnConsumeAdd
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 monthlyPRpageLang.PR 
+                                                .isnConsumeUpdate
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 monthlyPRpageLang.SRM 
+                                                .standAdd
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 monthlyPRpageLang.SXB_search 
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                  .importNonMonthlyData 
+                                                .standUpdate
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                  .on_the_way_search 
+                                                .importMonthlyData
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                monthlyPRpageLang.PR
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                monthlyPRpageLang.SRM
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                monthlyPRpageLang.SXB_search
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                .importNonMonthlyData
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                .on_the_way_search
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
 
-                                <li class="sidebar-item">
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#obound" data-bs-toggle="collapse" class="sidebar-link collapsed"
                                         aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -278,93 +258,87 @@
                                             <path
                                                 d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
                                         </svg>
-                                        <span class="align-middle">  .obound </span>
-                                        <!-- <span class="sidebar-badge badge bg-primary">Pro</span> -->
+                                        <span class="align-middle"> .obound </span>
+                                        <span class="sidebar-badge badge bg-primary">Pro</span>
                                     </a>
                                     <ul id="obound" class="sidebar-dropdown list-unstyled collapse"
                                         data-bs-parent="#sidebar">
 
-                                        <li
-                                            class="sidebar-item">
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 oboundpageLang.newMats 
-                                            </a>
-                                        </li>
-
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                 oboundpageLang.matsInfo 
-                                            </a>
-                                        </li>
-
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                 oboundpageLang.inbound 
+                                                oboundpageLang.newMats
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 oboundpageLang.inboundsearch 
-                                            </a>
-                                        </li>
-
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                 oboundpageLang.stockupload 
+                                                oboundpageLang.matsInfo
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 oboundpageLang.searchstock 
-                                            </a>
-                                        </li>
-
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                 oboundpageLang.pick 
+                                                oboundpageLang.inbound
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 oboundpageLang.picklist 
+                                                oboundpageLang.inboundsearch
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 oboundpageLang.pickrecord 
-                                            </a>
-                                        </li>
-
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                 oboundpageLang.back 
+                                                oboundpageLang.stockupload
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 oboundpageLang.backlist 
+                                                oboundpageLang.searchstock
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 oboundpageLang.backrecord 
+                                                oboundpageLang.pick
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                oboundpageLang.picklist
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                oboundpageLang.pickrecord
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                oboundpageLang.back
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                oboundpageLang.backlist
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                oboundpageLang.backrecord
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
 
-                                <li class="sidebar-item">
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#bu" data-bs-toggle="collapse" class="sidebar-link collapsed"
                                         aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -374,49 +348,45 @@
                                                 d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z" />
                                         </svg>
 
-                                        <span class="align-middle">  .bu </span>
+                                        <span class="align-middle"> .bu </span>
                                     </a>
                                     <ul id="bu" class="sidebar-dropdown list-unstyled collapse"
                                         data-bs-parent="#sidebar">
                                         <li class="sidebar-item">
-                                            <a id="passiveStockBtn" class="sidebar-link"
-                                                href="">
-                                                 bupagelang.sluggish 
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                 bupagelang.factorychange 
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                 bupagelang.searchlist 
+                                            <a id="passiveStockBtn" class="sidebar-link" href="">
+                                                bupagelang.sluggish
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 bupagelang.outlist 
+                                                bupagelang.factorychange
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 bupagelang.picklist 
+                                                bupagelang.searchlist
                                             </a>
                                         </li>
-                                        <li
-                                            class="sidebar-item">
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 bupagelang.searchdetail 
+                                                bupagelang.outlist
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                bupagelang.picklist
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                bupagelang.searchdetail
                                             </a>
                                         </li>
 
                                     </ul>
-                                </li>
+                                </li> -->
 
-                                <li class="sidebar-item">
+                                <!-- <li class="sidebar-item">
                                     <a href="#call" data-bs-toggle="collapse" class="sidebar-link collapsed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-exclamation-triangle align-middle me-2"
@@ -426,26 +396,26 @@
                                             <path
                                                 d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
                                         </svg>
-                                        <span class="align-middle">  .callsys </span>
+                                        <span class="align-middle"> .callsys </span>
                                     </a>
                                     <ul id="call" class="sidebar-dropdown list-unstyled collapse "
                                         data-bs-parent="#sidebar">
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 callpageLang.safealert 
+                                                callpageLang.safealert
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                 callpageLang.dayalert 
+                                                callpageLang.dayalert
                                             </a>
                                         </li>
 
                                     </ul>
-                                </li>
+                                </li> -->
 
-                                <li class="sidebar-item">
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#checking" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -458,30 +428,29 @@
                                             <path
                                                 d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
                                         </svg>
-                                        <span class="align-middle">  .checkIvent </span>
-                                        <!-- <span class="sidebar-badge badge bg-primary">Pro</span> -->
+                                        <span class="align-middle"> .checkIvent </span>
+                                        <span class="sidebar-badge badge bg-primary">Pro</span>
                                     </a>
                                     <ul id="checking" class="sidebar-dropdown list-unstyled collapse"
                                         data-bs-parent="#sidebar">
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                  create_new_table 
+                                                create_new_table
                                             </a>
                                         </li>
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                  check 
+                                                check
                                             </a>
                                         </li>
-                                        <li
-                                            class="sidebar-item">
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                  .check_result 
+                                                .check_result
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="sidebar-item">
+                                </li> -->
+                                <!-- <li class="sidebar-item">
                                     <a href="#auth" data-bs-toggle="collapse" class="sidebar-link collapsed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-people align-middle me-2"
@@ -489,49 +458,48 @@
                                             <path
                                                 d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
                                         </svg>
-                                        <span class="align-middle">  .userManage </span>
+                                        <span class="align-middle"> .userManage </span>
                                     </a>
                                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse "
                                         data-bs-parent="#sidebar">
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                  .changePass 
-                                                <!-- <span class="sidebar-badge badge bg-primary">Pro</span> -->
-                                            </a>
-                                        </li>
-
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                  .newUser </a>
-                                        </li>
-
-                                        <li
-                                            class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                  .newPInfo 
-                                                <!-- <span class="sidebar-badge badge bg-primary">Pro</span> -->
-                                            </a>
-                                        </li>
-
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="">
-                                                  .PInfo 
+                                                .changePass
                                                 <span class="sidebar-badge badge bg-primary">Pro</span>
                                             </a>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <a class="sidebar-link" href="">
-                                                  .UserInfo 
+                                                .newUser </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                .newPInfo
+                                                <span class="sidebar-badge badge bg-primary">Pro</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                .PInfo
+                                                <span class="sidebar-badge badge bg-primary">Pro</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="">
+                                                .UserInfo
                                                 <span class="sidebar-badge badge bg-primary">Pro</span>
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
                                 <!-- <li class="sidebar-header">
                                     Components
                                 </li> -->
-                                <li class="sidebar-item">
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#ui" data-bs-toggle="collapse" class="sidebar-link collapsed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -563,8 +531,8 @@
                                         <li class="sidebar-item"><a class="sidebar-link"
                                                 href="ui-typography.html">Typography</a></li>
                                     </ul>
-                                </li>
-                                <li class="sidebar-item">
+                                </li> -->
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#forms" data-bs-toggle="collapse" class="sidebar-link collapsed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -584,8 +552,8 @@
                                                 href="forms-input-groups.html">Input Groups <span
                                                     class="sidebar-badge badge bg-primary">Pro</span></a></li>
                                     </ul>
-                                </li>
-                                <li class="sidebar-item">
+                                </li> -->
+                                <!-- <li class="sidebar-item">
                                     <a class="sidebar-link" href="tables-bootstrap.html">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -599,12 +567,12 @@
                                             <line x1="3" y1="18" x2="3.01" y2="18"></line>
                                         </svg> <span class="align-middle">Tables</span>
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <!-- <li class="sidebar-header">
                                     Plugins &amp; Addons
                                 </li> -->
-                                <li class="sidebar-item">
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#form-plugins" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -628,8 +596,8 @@
                                                 href="forms-validation.html">Validation <span
                                                     class="sidebar-badge badge bg-primary">Pro</span></a></li>
                                     </ul>
-                                </li>
-                                <li class="sidebar-item">
+                                </li> -->
+                                <!-- <li class="sidebar-item">
                                     <a data-bs-target="#datatables" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -665,7 +633,7 @@
                                                 href="tables-datatables-ajax.html">Ajax Sourced Data <span
                                                     class="sidebar-badge badge bg-primary">Pro</span></a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                                 <!-- <li class="sidebar-item">
                                     <a data-bs-target="#charts" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed">
