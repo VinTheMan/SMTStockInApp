@@ -19,4 +19,12 @@ export default {
   methods: {
     // do nothing for now
   },
+  watch: {
+    // for debug purpose
+    // watch route change, to and from are both $route Obj
+    $route(to, from) {
+      console.log("Going from " + "__ " + from.name); // test
+      console.log("To " + "__ " + to.name); // test
+    },
+  },
 };

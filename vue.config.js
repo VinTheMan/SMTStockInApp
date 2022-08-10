@@ -7,6 +7,15 @@ module.exports = {
   },
   pluginOptions: {
     electronBuilder: {
+      builderOptions: {
+        win: {
+          icon: "./src/assets/img/icons/appIcon.ico",
+        },
+        nsis: {
+          installerIcon: "./src/assets/img/icons/installerIcon.ico",
+          installerHeaderIcon: "./src/assets/img/icons/installerIcon.ico",
+        },
+      },
       preload: "src/preload.ts",
       nodeIntegration: true,
       chainWebpackMainProcess: (config) => {
