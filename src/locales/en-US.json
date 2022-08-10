@@ -1,5 +1,20 @@
 {
   "messages": {
     "hello": "Hello, {name}!"
+  },
+  "navbar": {
+    "profile": "Profile",
+    "database": "Site",
+    "language": "Language(语言)",
+    "settings": "Settings",
+    "help": "Help",
+    "logout": "Log Out"
+  },
+  "sidebar": {
+    "Test": {
+      "topic": "Test",
+      "as_station": "Work as Station",
+      "as_scanner": "Work as Scanner"
+    }
   }
 }

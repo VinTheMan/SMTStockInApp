@@ -219,7 +219,7 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <span>Profile</span>
+                        <span>&nbsp;{{ $t("navbar.profile") }}</span>
                     </a>
                     <a class="dropdown-item disabled align-items-center" style="color : #495057;" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -229,7 +229,7 @@
                             <path
                                 d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z" />
                         </svg>
-                        <span>Get Database Here</span>
+                        <span>&nbsp;{{ $t("navbar.database") }}</span>
                     </a>
                     <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target="#langMenu" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -238,14 +238,14 @@
                             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                         </svg>
-                        <span>templateWords.language</span>
+                        <span>&nbsp;{{ $t("navbar.language") }}</span>
                     </a>
                     <div class="collapse" id="langMenu">
-                        <a class="dropdown-item justify-content-center" href="{{ url('/lang/en') }}">
+                        <a @click="$i18n.locale = 'en-US'" class="dropdown-item justify-content-center">
                             English</a>
-                        <a class="dropdown-item justify-content-center" href="{{ url('/lang/zh-TW') }}">
+                        <a @click="$i18n.locale = 'zh-TW'" class="dropdown-item justify-content-center">
                             繁體中文</a>
-                        <a class="dropdown-item justify-content-center" href="{{ url('/lang/zh-CN') }}">
+                        <a @click="$i18n.locale = 'zh-CN'" class="dropdown-item justify-content-center">
                             简体中文</a>
                     </div>
                     <div class="dropdown-divider"></div>
@@ -258,7 +258,7 @@
                                 d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
                             </path>
                         </svg>
-                        <span>Settings</span>
+                        <span>&nbsp;{{ $t("navbar.settings") }}</span>
                     </a>
                     <a class="dropdown-item" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -268,7 +268,7 @@
                             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
                             <line x1="12" y1="17" x2="12.01" y2="17"></line>
                         </svg>
-                        <span>Help Center</span>
+                        <span>&nbsp;{{ $t("navbar.help") }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" id="logoutbtn" href="">
@@ -279,7 +279,7 @@
                             <polyline points="16 17 21 12 16 7"></polyline>
                             <line x1="21" y1="12" x2="9" y2="12"></line>
                         </svg>
-                        <span>templateWords.logout_btn</span>
+                        <span>&nbsp;{{ $t("navbar.logout") }}</span>
                     </a>
                 </div>
             </li>

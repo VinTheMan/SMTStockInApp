@@ -28,7 +28,7 @@ library.add(faBell);
 type MessageSchema = typeof enUS;
 
 const i18n = createI18n<[MessageSchema], "en-US" | "zh-TW" | "zh-CN">({
-  locale: "zh-CN",
+  locale: "en-US",
   messages: {
     "en-US": enUS,
     "zh-CN": zhCN,

@@ -1,5 +1,20 @@
 {
   "messages": {
     "hello": "你好, {name}!"
+  },
+  "navbar": {
+    "profile": "个人档案",
+    "database": "厂别",
+    "language": "语言",
+    "settings": "设定",
+    "help": "帮助",
+    "logout": "登出"
+  },
+  "sidebar": {
+    "Test": {
+      "topic": "测试模块",
+      "as_station": "以本程式作为工作站",
+      "as_scanner": "以本程式作为分拣机/PDA"
+    }
   }
 }
