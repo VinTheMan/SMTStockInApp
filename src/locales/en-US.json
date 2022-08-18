@@ -14,7 +14,9 @@
     "Test": {
       "topic": "Test",
       "as_station": "Work as Station",
-      "as_scanner": "Work as Scanner"
+      "as_scanner": "Work as Scanner",
+      "qrcode": "generate qrcode"
+
     }
   }
 }

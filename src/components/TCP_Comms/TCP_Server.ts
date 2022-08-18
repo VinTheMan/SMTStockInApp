@@ -7,18 +7,20 @@ const results = Object.create(null); // Or just '{}', an empty object
 
 let socketServer;
 export default {
+  name: "tcp-server",
   data() {
     return {
       address: "Not Opened",
       port: "8085",
       family: "Not Opened",
-      server: null,
+      server: null
     };
   },
   mounted() {
-    let nrName = "" ;
-    for (const name of Object.keys(nets)) { 
-      for (const nr of nets[name]) { // find self ipv4 address
+    let nrName = "";
+    for (const name of Object.keys(nets)) {
+      for (const nr of nets[name]) {
+        // find self ipv4 address
         // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
         // 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6
         const familyV4Value = typeof nr.family === "string" ? "IPv4" : 4;
@@ -28,7 +30,7 @@ export default {
           } // if
           results[name].push(nr.address);
 
-          if( nrName === "" ) {
+          if (nrName === "") {
             nrName = name;
           } // if
 
@@ -44,6 +46,8 @@ export default {
       console.log("We are now open and start listening on port :" + this.port);
       this.address = results[nrName][0];
       this.family = socketServer.address().family;
+      // var qrcode = document.getElementById('canvasDom');
+      // alert(qrcode);
     });
 
     socketServer.on("close", () => {
@@ -79,6 +83,6 @@ export default {
       } catch (error) {
         console.error(error);
       } // try-catch
-    },
-  },
+    }
+  }
 };

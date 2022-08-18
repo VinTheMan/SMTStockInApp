@@ -61,6 +61,11 @@
                                                 {{ $t("sidebar.Test.as_scanner") }}
                                             </router-link>
                                         </li>
+                                        <li class="sidebar-item" :class="{active: active_el.includes('test_qrcode')}">
+                                            <router-link class="sidebar-link" to="/test/qrcode">
+                                                {{ $t("sidebar.Test.qrcode") }}
+                                            </router-link>
+                                        </li>
                                     </ul>
                                 </li>
 

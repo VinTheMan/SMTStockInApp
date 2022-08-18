@@ -4,6 +4,7 @@ import * as net from "net";
 let socketClient;
 
 export default {
+  name: "tcp-client",
   data() {
     return {
       ip: "172.20.10.2",

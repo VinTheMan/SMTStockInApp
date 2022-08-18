@@ -14,7 +14,9 @@
     "Test": {
       "topic": "测试模块",
       "as_station": "以本程式作为工作站",
-      "as_scanner": "以本程式作为分拣机/PDA"
+      "as_scanner": "以本程式作为分拣机/PDA",
+      "qrcode": "產生qrcode"
+
     }
   }
 }
