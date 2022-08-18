@@ -16,11 +16,4 @@
   </div>
 </template>
 
-<script src="./TCP_Server.ts">
-export default {
-  name: 'tcp-server',
-  props: {
-    msg: String
-  }
-}
-</script>
+<script src="./TCP_Server.ts"></script>

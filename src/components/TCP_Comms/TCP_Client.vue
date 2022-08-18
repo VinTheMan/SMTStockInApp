@@ -18,11 +18,4 @@
   </div>
 </template>
 
-<script src="./TCP_Client.ts">
-export default {
-  name: 'tcp-reader',
-  props: {
-    msg: String
-  }
-}
-</script>
+<script src="./TCP_Client.ts"></script>
