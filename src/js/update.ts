@@ -45,7 +45,8 @@ export class AppUpdater {
       //   // Any request headers to include here
       // },
       provider: "generic",
-      url: "http://172.20.10.7:5000/update/" + platform + arch, // update server url
+      url: "http://172.20.10.7:5000/update/" + platform + arch + "/beta", // update server url (dev)
+      // url: "http://172.22.252.160:5000/update/" + platform + arch + "/stable", // update server url (production)
     };
 
     this.nsisUpdater = new NsisUpdater(options);
