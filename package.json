@@ -1,6 +1,6 @@
 {
   "name": "smt-stockin-app",
-  "version": "0.1.1",
+  "version": "0.0.9",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -22,6 +22,8 @@
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "core-js": "^3.8.3",
+    "electron-log": "^4.4.8",
+    "electron-updater": "^5.2.1",
     "feather-icons": "^4.29.0",
     "fs": "^0.0.1-security",
     "node-ipc": "^11.1.0",
