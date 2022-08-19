@@ -168,8 +168,7 @@ export default {
           if (alldataarr[6].length == 0) {
             client.write("TIDAK ADA REEL ID" + "\n" + "REELID空缺");
             correct = false;
-          }
-          if (alldataarr[6].startsWith("R")) Pninfor.rid = alldataarr[6];
+          } else if (alldataarr[6].startsWith("R")) Pninfor.rid = alldataarr[6];
           else {
             client.write("REEL ID SALAH BARCODE" + "\n" + "RID條碼格式錯誤");
             correct = false;
@@ -183,54 +182,15 @@ export default {
           for (let i = 0; i < 7; i++) {
             this.dataarr[i] = alldataarr[i];
           }
-
           await sendData(alldataarr).then((value) => {
-            client.write("113");
-
-            console.log(value); // "Success"
+            if (value == -1) {
+              client.write(
+                "D/C SALAH BARCODE" + "\n" + "沒有D/C管控，不能入料"
+              );
+            } else if (value == -2) {
+              client.write("D/C EXPIRED" + "\n" + "D/C過期，請找組長確認");
+            }
           });
-          //   sendData(alldataarr, code);
-          //   sendData(alldataarr).then((value) => {
-          //     console.log(value); // "Success"
-          //     client.write("test");
-          //   });
-          //   axios
-          //     .post("http://127.0.0.1:8088/api/test", {
-          //       var1: alldataarr[0],
-          //       var2: alldataarr[1],
-          //       var3: alldataarr[2],
-          //       var4: alldataarr[3],
-          //       var5: alldataarr[4],
-          //       var6: alldataarr[5],
-          //       var7: alldataarr[6]
-          //     })
-          //     .then((response) => {
-          //       if (response.data[0] == -1) {
-          //         this.code = -1;
-          //       }
-          //       this.test = response.data[0];
-          //       console.log(response.data);
-          //     })
-          //     .catch((error) => {
-          //       this.errorMessage = error.message;
-          //       console.error("There was an error!", error);
-          //     });
-          // .finally(() => {
-          //   if (this.code == -1) {
-          //     client.write(
-          //       "D/C SALAH BARCODE" + "\n" + "沒有D/C管控，不能入料"
-          //     );
-          //   }
-          // });]
-          //   console.log("test");
-          //   //   client.write("OK;" + "\n" + "Correct");
-
-          //   setTimeout(function () {
-          //     console.log("123");
-          //   }, 5 * 1 * 1000); // after 5s
-          //   } else {
-          //     client.write("OK;" + "\n" + "Correct");
-          //   }
         }
       });
       client.on("close", () => {
@@ -336,14 +296,7 @@ async function sendData(alldataarr) {
       var7: alldataarr[6]
     })
     .then((response) => {
-      //   if (response.data[0] == -1) {
-      //     code = -1;
-      //   } else {
-      //     code = 2;
-      //   }
-      //   //   this.test = response.data[0];
-      //   return code;
-      console.log(response.data[0]);
+      console.log(response.data[1]);
       test = response.data[0];
     })
     .catch((error) => {
@@ -353,16 +306,3 @@ async function sendData(alldataarr) {
 
   return test;
 }
-
-// async function showresult(alldataarr, code, client) {
-//   console.log(code);
-
-//   await sendData(alldataarr).then((value) => {
-//     console.log(value);
-//     code = value;
-//   });
-
-//   //client.write("SALAH BARCODE" + "\n" + "條碼11格式錯誤");
-//   console.log("++++++++++++++++++++++++++++++++");
-//   return code;
-// }
