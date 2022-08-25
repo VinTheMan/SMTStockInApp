@@ -1,18 +1,22 @@
 ("use strict");
 // import Vue from "vue";
 // const net = require("net");
-
 export default {
   data() {
     return {
-      database_ip: "172.20.10.2",
-      port: "1433",
-      message: "test message",
+      test_api: "None",
     };
   },
   mounted() {
     // do nothing
   },
   name: "PostToCheckScannerDataComponent",
-  methods: {},
+  methods: {
+    postRequest() {
+      this.axios
+        .post(sessionStorage.getItem("apiURL") + "/test2")
+        .then((response) => (this.test_api = response.data.message))
+        .catch((error) => console.log(error));
+    },
+  },
 };

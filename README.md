@@ -1,5 +1,4 @@
 ## To build an exe for Windows on a macOS, use docker image
-## then use "yarn electron:build --win" in container
 ## Change built icons in vue.config.js
 ```
 docker run --rm -ti \
@@ -11,6 +10,9 @@ docker run --rm -ti \
  -v ~/.cache/electron:/root/.cache/electron \
  -v ~/.cache/electron-builder:/root/.cache/electron-builder \
  electronuserland/builder:wine
+
+-----> then use "yarn electron:build --win" in container
+
 ```
 
 ### Compiles and hot-reloads for development

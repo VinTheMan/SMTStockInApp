@@ -20,6 +20,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "../src/Admin/Admin.css";
 // import "../src/assets/css/app.css";
+import interceptor from "./js/AxiosInterceptor";
 
 /* add icons to the library */
 library.add(faBell);
@@ -45,4 +46,5 @@ createApp({
 })
   .use(i18n)
   .use(router)
+  .use(interceptor)
   .mount("#mountingPoint");
