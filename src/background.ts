@@ -1,3 +1,4 @@
+import { GlobalVar } from "./../GlobalVar";
 /* eslint-disable */
 ("use strict");
 import { app, BrowserWindow, protocol, ipcMain, safeStorage } from "electron";
@@ -7,25 +8,19 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
 import path from "path";
 
-ipcMain.on("take-cat-home-message", (event, arg) => {
-  // for testing purpose
-  console.log(arg); // prints "帶小貓回家"
-  event.reply("need-clean-reply", app.getPath("userData"));
-});
-
 ipcMain.handle("getAppVer", async (event, arg) => {
   return app.getVersion();
 });
 
 ipcMain.handle("EncryptApiToken", async (event, arg) => {
-  console.log("ApiTokenToBeEncrypted :" + arg); // test
+  // console.log("ApiTokenToBeEncrypted :" + arg); // test
   const token: Buffer = safeStorage.encryptString(arg);
-  console.log(token.toString("base64")); // test
+  // console.log(token.toString("base64")); // test
   return token.toString("base64");
 });
 
 ipcMain.handle("DecryptApiToken", async (event, arg) => {
-  console.log("ApiTokenToBeDecrypted :" + arg); // test
+  // console.log("ApiTokenToBeDecrypted :" + arg); // test
   const buffer = Buffer.from(arg, "base64");
   const token: string = safeStorage.decryptString(buffer);
   return token;
@@ -33,7 +28,7 @@ ipcMain.handle("DecryptApiToken", async (event, arg) => {
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
-  { scheme: "app", privileges: { secure: true, standard: true } }
+  { scheme: "app", privileges: { secure: true, standard: true } },
 ]);
 
 async function createWindow() {
@@ -46,8 +41,8 @@ async function createWindow() {
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: true,
       contextIsolation: false,
-      preload: path.join(__dirname, "preload.js")
-    }
+      preload: path.join(__dirname, "preload.js"),
+    },
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -118,4 +113,13 @@ process.on("unhandledRejection", (error) => {
   console.log("unhandledRejection", error);
 });
 
-app.on("browser-window-created", (event, browserwindow) => {});
+app.on("browser-window-created", (event, browserwindow) => {
+  console.log(
+    "|-----------------------------------------------------------------------"
+  );
+  console.log("| AppData path : " + app.getPath("userData"));
+  console.log(
+    "|-----------------------------------------------------------------------"
+  );
+  // console.log( JSON.stringify(process.env)); // test
+});
