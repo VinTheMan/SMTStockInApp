@@ -45,7 +45,7 @@ export class AppUpdater {
 
     const updateServerUrl: string =
       appVer.indexOf("beta") !== -1 // if the version has trailing "beta" tag
-        ? "http://172.20.10.7:5000/update/" + platform + arch + "/beta"
+        ? "http://192.168.176.51:5000/update/" + platform + arch + "/beta"
         : "http://172.22.252.160:5000/update/" + platform + arch + "/stable";
     const options: AllPublishOptions = {
       // requestHeaders: {

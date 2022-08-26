@@ -5,7 +5,7 @@ import * as net from "net";
 import { exit, send } from "process";
 import { end } from "@popperjs/core";
 import { EOF } from "dns";
-import axios from "axios";
+// import axios from "axios";
 const { networkInterfaces } = require("os");
 const nets = networkInterfaces();
 const results = Object.create(null); // Or just '{}', an empty object
@@ -122,7 +122,7 @@ export default {
             correct = false;
           }
           //Date Code 格式
-          var dcerror = checkdatecode(alldataarr[4]);
+          var dcerror = this.checkdatecode(alldataarr[4]);
           if (dcerror == -1) {
             client.write("D/C SALAH BARCODE" + "\n" + "D/C格式錯誤");
             correct = false;
@@ -162,7 +162,7 @@ export default {
           for (let i = 0; i < 7; i++) {
             this.dataarr[i] = alldataarr[i];
           }
-          await sendData(alldataarr).then((value) => {
+          await this.sendData(alldataarr).then((value) => {
             if (value[0] > 0) {
               client.write("OK;" + "\n" + "Correct");
             } else if (value[0] === -1) {
@@ -265,78 +265,81 @@ export default {
       else {
         socketServer.listen(this.port);
       } // else
+    },
+
+    async sendData(alldataarr) {
+      let test = 0;
+      alldataarr.push("123");
+      await this.axios
+        .post("http://127.0.0.1:8088/api/test", {
+          AllData: JSON.stringify(alldataarr)
+        })
+        .then((response) => {
+          console.log(response.data);
+          test = response.data;
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
+          console.error("There was an error!", error);
+        });
+
+      return test;
+    },
+
+    checkdatecode(datecode) {
+      let currentdate = new Date();
+      var oneJan = new Date(currentdate.getFullYear(), 0, 1);
+      var numberOfDays = Math.floor(
+        (Number(currentdate) - Number(oneJan)) / (24 * 60 * 60 * 1000)
+      );
+      var result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7); //get now week number
+      if (result < 10) var resultstr = "0" + result.toString();
+      else resultstr = result.toString();
+
+      if (datecode.includes("D")) {
+        datecode = datecode.substring(datecode.lastIndexOf("D") + 1);
+        if (parseInt(datecode) <= 0 || isNaN(parseInt(datecode))) return -1;
+      } else {
+        if (parseInt(datecode) <= 0 || isNaN(parseInt(datecode))) return -1;
+      }
+
+      if (datecode.length == 8) {
+        var weeknum = this.getweeknumber(datecode);
+        datecode = datecode.toString().substring(2, 4) + weeknum;
+        //return datecode;
+      } else if (datecode.length == 6) {
+        var input = "20" + datecode.toString();
+        var weeknum = this.getweeknumber(input);
+        datecode = datecode.toString().substring(0, 2) + weeknum;
+        //return datecode;
+      } else if (datecode.length == 4) {
+      }
+      var nowyear = new Date().getFullYear();
+      if (
+        Number(nowyear.toString().substring(2, 4) + resultstr) -
+          Number(datecode) <
+        0
+      )
+        return -2;
+      else return datecode;
+    },
+
+    getweeknumber(input) {
+      input =
+        input.substring(0, 4) +
+        "-" +
+        input.substring(4, 6) +
+        "-" +
+        input.substring(6, 8);
+
+      let currentdate = new Date(input);
+      var oneJan = new Date(currentdate.getFullYear(), 0, 1);
+      var numberOfDays = Math.floor(
+        (Number(currentdate) - Number(oneJan)) / (24 * 60 * 60 * 1000)
+      );
+      var result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7); //get now week number
+      if (result < 10) return "0" + result.toString();
+      else return result;
     }
   }
 };
-function checkdatecode(datecode) {
-  let currentdate = new Date();
-  var oneJan = new Date(currentdate.getFullYear(), 0, 1);
-  var numberOfDays = Math.floor(
-    (Number(currentdate) - Number(oneJan)) / (24 * 60 * 60 * 1000)
-  );
-  var result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7); //get now week number
-  if (result < 10) var resultstr = "0" + result.toString();
-  else resultstr = result.toString();
-
-  if (datecode.includes("D")) {
-    datecode = datecode.substring(datecode.lastIndexOf("D") + 1);
-    if (parseInt(datecode) <= 0 || isNaN(parseInt(datecode))) return -1;
-  } else {
-    if (parseInt(datecode) <= 0 || isNaN(parseInt(datecode))) return -1;
-  }
-
-  if (datecode.length == 8) {
-    var weeknum = getweeknumber(datecode);
-    datecode = datecode.toString().substring(2, 4) + weeknum;
-    //return datecode;
-  } else if (datecode.length == 6) {
-    var input = "20" + datecode.toString();
-    var weeknum = getweeknumber(input);
-    datecode = datecode.toString().substring(0, 2) + weeknum;
-    //return datecode;
-  } else if (datecode.length == 4) {
-  }
-  var nowyear = new Date().getFullYear();
-  if (
-    Number(nowyear.toString().substring(2, 4) + resultstr) - Number(datecode) <
-    0
-  )
-    return -2;
-  else return datecode;
-}
-
-function getweeknumber(input) {
-  input =
-    input.substring(0, 4) +
-    "-" +
-    input.substring(4, 6) +
-    "-" +
-    input.substring(6, 8);
-
-  let currentdate = new Date(input);
-  var oneJan = new Date(currentdate.getFullYear(), 0, 1);
-  var numberOfDays = Math.floor(
-    (Number(currentdate) - Number(oneJan)) / (24 * 60 * 60 * 1000)
-  );
-  var result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7); //get now week number
-  if (result < 10) return "0" + result.toString();
-  else return result;
-}
-async function sendData(alldataarr) {
-  let test = 0;
-  alldataarr.push("123");
-  await axios
-    .post("http://127.0.0.1:8088/api/test", {
-      AllData: JSON.stringify(alldataarr)
-    })
-    .then((response) => {
-      console.log(response.data);
-      test = response.data;
-    })
-    .catch((error) => {
-      this.errorMessage = error.message;
-      console.error("There was an error!", error);
-    });
-
-  return test;
-}
