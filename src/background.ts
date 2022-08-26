@@ -1,17 +1,34 @@
-("use strict");
 /* eslint-disable */
-const { app, BrowserWindow, protocol, ipcMain } = require("electron");
+("use strict");
+import { app, BrowserWindow, protocol, ipcMain, safeStorage } from "electron";
 import { AppUpdater } from "./js/update";
-
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-// import { text } from 'body-parser'
 const isDevelopment = process.env.NODE_ENV !== "production";
-const path = require("path");
+import path from "path";
 
 ipcMain.on("take-cat-home-message", (event, arg) => {
+  // for testing purpose
   console.log(arg); // prints "帶小貓回家"
-  event.reply("need-clean-reply", "貓咪肚子餓");
+  event.reply("need-clean-reply", app.getPath("userData"));
+});
+
+ipcMain.handle("getAppVer", async (event, arg) => {
+  return app.getVersion();
+});
+
+ipcMain.handle("EncryptApiToken", async (event, arg) => {
+  console.log("ApiTokenToBeEncrypted :" + arg); // test
+  const token: Buffer = safeStorage.encryptString(arg);
+  console.log(token.toString("base64")); // test
+  return token.toString("base64");
+});
+
+ipcMain.handle("DecryptApiToken", async (event, arg) => {
+  console.log("ApiTokenToBeDecrypted :" + arg); // test
+  const buffer = Buffer.from(arg, "base64");
+  const token: string = safeStorage.decryptString(buffer);
+  return token;
 });
 
 // Scheme must be registered before the app is ready
@@ -27,13 +44,8 @@ async function createWindow() {
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration:
-        process.env.ELECTRON_NODE_INTEGRATION?.toString().toLowerCase() ===
-        "true",
-      contextIsolation: !(
-        process.env.ELECTRON_NODE_INTEGRATION?.toString().toLowerCase() ===
-        "true"
-      ),
+      nodeIntegration: true,
+      contextIsolation: false,
       preload: path.join(__dirname, "preload.js")
     }
   });
@@ -73,7 +85,7 @@ app.on("ready", async () => {
     // Install Vue Devtools
     try {
       await installExtension(VUEJS_DEVTOOLS);
-      // await installExtension(VUEJS3_DEVTOOLS, {
+      // await installExtension(VUEJS_DEVTOOLS, {
       //   loadExtensionOptions: {
       //     allowFileAccess: true,
       //   },
@@ -81,7 +93,7 @@ app.on("ready", async () => {
     } catch (e) {
       console.error("Vue Devtools failed to install:", e.toString());
     } // try-catch
-  }
+  } // if
 
   createWindow();
 });
@@ -105,3 +117,5 @@ process.on("unhandledRejection", (error) => {
   // Will print "unhandledRejection err is not defined"
   console.log("unhandledRejection", error);
 });
+
+app.on("browser-window-created", (event, browserwindow) => {});

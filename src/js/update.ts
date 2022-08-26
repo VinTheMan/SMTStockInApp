@@ -14,6 +14,9 @@ export class AppUpdater {
   } // getter
 
   constructor() {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const appVer: string = app.getVersion();
+
     let platform = "";
     let arch = "";
 
@@ -40,12 +43,16 @@ export class AppUpdater {
       } // else
     } // else if
 
+    const updateServerUrl: string =
+      appVer.indexOf("beta") !== -1 // if the version has trailing "beta" tag
+        ? "http://172.20.10.7:5000/update/" + platform + arch + "/beta"
+        : "http://172.22.252.160:5000/update/" + platform + arch + "/stable";
     const options: AllPublishOptions = {
       // requestHeaders: {
       //   // Any request headers to include here
       // },
       provider: "generic",
-      url: "http://172.20.10.7:5000/update/" + platform + arch, // update server url
+      url: updateServerUrl,
     };
 
     this.nsisUpdater = new NsisUpdater(options);

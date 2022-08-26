@@ -1,9 +1,9 @@
-/* eslint-disable */
-const { ipcRenderer } = require("electron");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 window.ipcRenderer = require("electron").ipcRenderer;
+import { ipcRenderer } from "electron";
 
 ipcRenderer.on("need-clean-reply", (event, arg) => {
-  console.log(arg); // 印出 "貓咪肚子餓"
+  console.log(arg); // prints the config.json location
 });
 
 ipcRenderer.send("take-cat-home-message", "帶小貓回家");
@@ -19,9 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   ipcRenderer.on("update-message", function (event, args) {
-    console.log(
-      "ipcRenderer,message: " + JSON.stringify(args.message)
-    );
+    console.log("ipcRenderer,message: " + JSON.stringify(args.message));
     if ("update-not-available" === args.cmd) {
       console.log("ipcRenderer," + JSON.stringify(args.message));
     } else if ("update-available" === args.cmd) {
