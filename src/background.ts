@@ -16,7 +16,7 @@ ipcMain.on("take-cat-home-message", (event, arg) => {
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
-  { scheme: "app", privileges: { secure: true, standard: true } },
+  { scheme: "app", privileges: { secure: true, standard: true } }
 ]);
 
 async function createWindow() {
@@ -34,8 +34,8 @@ async function createWindow() {
         process.env.ELECTRON_NODE_INTEGRATION?.toString().toLowerCase() ===
         "true"
       ),
-      preload: path.join(__dirname, "preload.js"),
-    },
+      preload: path.join(__dirname, "preload.js")
+    }
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {

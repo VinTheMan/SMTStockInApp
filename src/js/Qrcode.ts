@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       address: null,
-      port: 8089,
+      port: 2000,
       componentKey: 0,
       family: "Not Opened",
       server: null,
@@ -32,31 +32,7 @@ export default {
       test: null
     };
   },
-  //   beforeMount() {
-  //     // do nothing for now
-  //     let nrName = "";
-  //     for (const name of Object.keys(nets)) {
-  //       for (const nr of nets[name]) {
-  //         // find self ipv4 address
-  //         // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
-  //         // 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6
-  //         const familyV4Value = typeof nr.family === "string" ? "IPv4" : 4;
-  //         if (nr.family === familyV4Value && !nr.internal) {
-  //           if (!results[name]) {
-  //             results[name] = [];
-  //           } // if
-  //           results[name].push(nr.address);
 
-  //           if (nrName === "") {
-  //             nrName = name;
-  //           } // if
-
-  //           console.log(results); // test
-  //         } // if
-  //       } // for
-  //     } // for
-  //     this.address = results[nrName][0];
-  //   },
   mounted() {
     let nrName = "";
     class Pninfor {
@@ -92,12 +68,13 @@ export default {
 
     const server = new net.Server();
     socketServer = server;
+    this.port = (document.getElementById("port") as HTMLInputElement).value;
     socketServer.listen(this.port);
 
     socketServer.on("listening", (client) => {
       console.log("We are now open and start listening on port :" + this.port);
       //this.address = results[nrName][0];
-      this.family = socketServer.address().family;
+      //this.family = socketServer.address().family;
       // var qrcode = document.getElementById('canvasDom');
       // alert(qrcode);
     });
@@ -152,7 +129,10 @@ export default {
           } else if (dcerror == -2) {
             client.write("D/C SALAH BARCODE" + "\n" + "D/C時間錯誤");
             correct = false;
-          } else Pninfor.dc = dcerror;
+          } else {
+            Pninfor.dc = dcerror;
+            alldataarr[4] = dcerror;
+          }
           //LOT 格式
           if (alldataarr[5].length > 0 && alldataarr[5].charAt(0) == "L") {
             alldataarr[5] = alldataarr[5].substring(1).toUpperCase();
@@ -183,12 +163,67 @@ export default {
             this.dataarr[i] = alldataarr[i];
           }
           await sendData(alldataarr).then((value) => {
-            if (value == -1) {
+            if (value[0] > 0) {
+              client.write("OK;" + "\n" + "Correct");
+            } else if (value[0] === -1) {
               client.write(
                 "D/C SALAH BARCODE" + "\n" + "沒有D/C管控，不能入料"
               );
-            } else if (value == -2) {
+            } else if (value[0] == -2) {
               client.write("D/C EXPIRED" + "\n" + "D/C過期，請找組長確認");
+            } else if (value[0] == -3) {
+              client.write(
+                "REEL ID TERULANG(" +
+                  "\n" +
+                  value[1] +
+                  "-" +
+                  value[2] +
+                  ")" +
+                  "\n" +
+                  "REELID重複(" +
+                  value[1] +
+                  "-" +
+                  value[2] +
+                  ")"
+              );
+            } else if (value[0] == -4) {
+              client.write(
+                "REEL ID TERULANG" +
+                  "\n" +
+                  "(" +
+                  value[1] +
+                  "-MATERIAL TIDAK ADA NOMOR)" +
+                  "REELID重複" +
+                  "\n" +
+                  "(" +
+                  value[1] +
+                  "-無對應縮號)"
+              );
+            } else if (value[0] == -5) {
+              client.write(
+                "REEL ID TERULANG" +
+                  "\n" +
+                  "(MATERIAL TIDAK ADA NOMOR)" +
+                  "\n" +
+                  "Reel ID重複(" +
+                  "無對應工單，上架)"
+              );
+            } else if (value[0] == -6) {
+              client.write(
+                "MATERIAL TIDAK ADA NOMOR" + "\n" + "無對應工單，上架"
+              );
+            } else if (value[0] == -7) {
+              client.write(
+                "Material Programming" + "\n" + "燒錄料，無法分工單"
+              );
+            } else if (value[0] == -8) {
+              client.write(
+                value[1] +
+                  "-TIDAK ADA NOMOR" +
+                  "\n\n" +
+                  value[1] +
+                  "-無對應縮號"
+              );
             }
           });
         }
@@ -201,9 +236,13 @@ export default {
 
     socketServer.on("close", () => {
       console.log("All connections are closed !");
-      //this.address = "Not Opened";
-      this.family = "Not Opened";
+      //   this.address = "Not Opened";
+      //   this.family = "Not Opened";
+      //   this.port = "Not Opened";
     });
+  },
+  unmounted() {
+    socketServer.close();
   },
   components: {
     Qrcodeger
@@ -285,19 +324,14 @@ function getweeknumber(input) {
 }
 async function sendData(alldataarr) {
   let test = 0;
+  alldataarr.push("123");
   await axios
     .post("http://127.0.0.1:8088/api/test", {
-      var1: alldataarr[0],
-      var2: alldataarr[1],
-      var3: alldataarr[2],
-      var4: alldataarr[3],
-      var5: alldataarr[4],
-      var6: alldataarr[5],
-      var7: alldataarr[6]
+      AllData: JSON.stringify(alldataarr)
     })
     .then((response) => {
-      console.log(response.data[1]);
-      test = response.data[0];
+      console.log(response.data);
+      test = response.data;
     })
     .catch((error) => {
       this.errorMessage = error.message;

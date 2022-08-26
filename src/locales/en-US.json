@@ -15,8 +15,8 @@
       "topic": "Test",
       "as_station": "Work as Station",
       "as_scanner": "Work as Scanner",
-      "qrcode": "generate qrcode"
-
+      "qrcode": "generate qrcode",
+      "import": "import xlsx"
     }
   }
 }
