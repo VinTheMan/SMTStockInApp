@@ -16,7 +16,9 @@
       "as_station": "Work as Station",
       "as_scanner": "Work as Scanner",
       "qrcode": "generate qrcode",
-      "import": "import xlsx"
+      "import": "import xlsx",
+      "worderdetail" : "worder detail",
+      "storehouse" : "External Storehouse match result"
     }
   }
 }

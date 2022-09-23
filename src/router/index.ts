@@ -50,13 +50,51 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/QrCodeview.vue"),
   },
   {
-    path: "/test/import",
-    name: "test_import",
+    path: "/test/outstorehouse",
+    name: "test_outstorehouse",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Importxlsx.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../views/Import/OutStorehouse.vue"
+      ),
+  },
+  {
+    path: "/test/orderlist",
+    name: "test_orderlist",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Import/Orderlist.vue"),
+  },
+  {
+    path: "/test/stageslot",
+    name: "test_stageslot",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Import/Stageslot.vue"),
+  },
+  {
+    path: "/test/worderdetail",
+    name: "test_worderdetail",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Detail/Worder.vue"),
+  },
+  {
+    path: "/test/storehouse",
+    name: "test_storehouse",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Detail/Storehouse.vue"),
   },
   {
     path: "/:pathMatch(.*)*",

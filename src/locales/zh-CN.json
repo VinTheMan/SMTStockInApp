@@ -16,7 +16,9 @@
       "as_station": "以本程式作为工作站",
       "as_scanner": "以本程式作为分拣机/PDA",
       "qrcode": "產生qrcode",
-      "import" : "上传档案"
+      "import" : "上传档案",
+      "worderdetail" : "工单发料明细",
+      "storehouse" : "外仓入料明细"
     }
   }
 }

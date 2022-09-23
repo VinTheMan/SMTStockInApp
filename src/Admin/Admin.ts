@@ -46,14 +46,14 @@ export default {
 
     sessionStorage.setItem("appVer", appVer as string);
     if (appVer?.indexOf("beta") !== -1) {
-      sessionStorage.setItem("apiURL", "http://192.168.176.51:8088/api");
+      sessionStorage.setItem("apiURL", "http://192.168.164.51:8088/api");
     } // if
     else {
       sessionStorage.setItem("apiURL", "http://172.22.252.160:8088/api");
     } // else
     sessionStorage.setItem(
       "autoupdateServerBeta",
-      "http://192.168.176.51:5000/update/" + platform + arch + "/beta"
+      "http://192.168.164.51:5000/update/" + platform + arch + "/beta"
     );
     sessionStorage.setItem(
       "autoupdateServerStable",

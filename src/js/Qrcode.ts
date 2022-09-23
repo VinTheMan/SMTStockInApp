@@ -269,13 +269,14 @@ export default {
 
     async sendData(alldataarr) {
       let test = 0;
-      alldataarr.push("123");
+      alldataarr.push(sessionStorage.getItem("rNo"));
       await this.axios
-        .post("http://127.0.0.1:8088/api/test", {
+        .post("http://192.168.164.51:8088/api/getdata", {
           AllData: JSON.stringify(alldataarr)
         })
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
+          console.log(response.status);
           test = response.data;
         })
         .catch((error) => {

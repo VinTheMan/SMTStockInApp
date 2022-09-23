@@ -68,12 +68,24 @@
                                             </router-link>
                                         </li>
 
-                                        <li class="sidebar-item" :class="{active: active_el.includes('test_import')}">
-                                            <router-link class="sidebar-link" to="/test/import" >
+                                        <li class="sidebar-item" :class="{active: active_el.includes('test_outstorehouse')||active_el.includes('test_orderlist')||active_el.includes('test_stageslot')}">
+                                            <router-link class="sidebar-link" to="/test/outstorehouse" >
                                                 {{ $t("sidebar.Test.import") }}
                                             </router-link>
                                         </li>
-                                        
+
+                                        <li class="sidebar-item" :class="{active: active_el.includes('test_worderdetail')}">
+                                            <router-link class="sidebar-link" to="/test/worderdetail" >
+                                                {{ $t("sidebar.Test.worderdetail") }}
+                                            </router-link>
+                                        </li>
+
+                                        <li class="sidebar-item" :class="{active: active_el.includes('test_storehouse')}">
+                                            <router-link class="sidebar-link" to="/test/storehouse" >
+                                                {{ $t("sidebar.Test.storehouse") }}
+                                            </router-link>
+                                        </li>
+
                                     </ul>
                                 </li>
 

@@ -8,7 +8,7 @@
             <p class="h1">Page not found.</p>
             <p class="h2 font-weight-normal mt-3 mb-4">
               <!-- eslint-disable-next-line prettier/prettier -->
-              The page you are looking for ({{ $route.fullPath }}) 
+              The page you are looking for ({{ $route.fullPath }})
               <!-- eslint-disable-next-line prettier/prettier -->
               might have been removed.
             </p>
