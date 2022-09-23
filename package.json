@@ -1,6 +1,6 @@
 {
   "name": "smt-stockin-app",
-  "version": "0.0.16-beta",
+  "version": "0.0.17-beta",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
