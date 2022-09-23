@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog, Menu } from "electron";
 import { NsisUpdater } from "electron-updater";
 import { AllPublishOptions } from "builder-util-runtime";
+import { GlobalVar } from "../../GlobalVar";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const log = require("electron-log");
 
@@ -45,8 +46,8 @@ export class AppUpdater {
 
     const updateServerUrl: string =
       appVer.indexOf("beta") !== -1 // if the version has trailing "beta" tag
-        ? "http://192.168.164.51:5000/update/" + platform + arch + "/beta"
-        : "http://172.22.252.160:5000/update/" + platform + arch + "/stable";
+        ? GlobalVar.UPDATE_URL_DEV + "/" + platform + arch + "/beta"
+        : GlobalVar.UPDATE_URL_PRODUCTION + "/" + platform + arch + "/stable";
     const options: AllPublishOptions = {
       // requestHeaders: {
       //   // Any request headers to include here

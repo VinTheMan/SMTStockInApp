@@ -1,6 +1,7 @@
 ("use strict");
 // import Vue from "vue";
 import { ipcRenderer } from "electron";
+import { GlobalVar } from "./../../GlobalVar";
 import SidebarComponent from "../components/Sidebar/Sidebar_index.vue";
 import NavbarComponent from "../components/Navbar/Navbar_index.vue";
 import TcpReader from "../components/TCP_Comms/TCP_Client.vue";
@@ -16,49 +17,13 @@ export default {
   async beforeCreate() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const appVer: string = await ipcRenderer.invoke("getAppVer");
-
-    // set the default configs for this app
-    let platform = "";
-    let arch = "";
-
-    if (process.platform === "darwin") {
-      platform = "osx";
-      if (process.arch === "arm64") {
-        arch = "arm64";
-      } else {
-        arch = "64";
-      } // else
-    } else if (process.platform === "win32") {
-      platform = "windows";
-      if (process.arch === "x64") {
-        arch = "64";
-      } else {
-        arch = "32";
-      } // else
-    } else if (process.platform === "linux") {
-      platform = "linux";
-      if (process.arch === "x64" || process.arch === "x86_64") {
-        arch = "64";
-      } else {
-        arch = "32";
-      } // else
-    } // else if
-
     sessionStorage.setItem("appVer", appVer as string);
     if (appVer?.indexOf("beta") !== -1) {
-      sessionStorage.setItem("apiURL", "http://192.168.164.51:8088/api");
+      sessionStorage.setItem("apiURL", GlobalVar.API_URL_DEV as string);
     } // if
     else {
-      sessionStorage.setItem("apiURL", "http://172.22.252.160:8088/api");
+      sessionStorage.setItem("apiURL", GlobalVar.API_URL_PRODUCTION as string);
     } // else
-    sessionStorage.setItem(
-      "autoupdateServerBeta",
-      "http://192.168.164.51:5000/update/" + platform + arch + "/beta"
-    );
-    sessionStorage.setItem(
-      "autoupdateServerStable",
-      "http://172.22.252.160:5000/update/" + platform + arch + "/stable"
-    );
     let nrName = "";
     for (const name of Object.keys(nets)) {
       // get the ipv4 address of this computer
@@ -79,6 +44,8 @@ export default {
         } // if
       } // for
     } // for
+
+    // when init, get a token before everything else
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
