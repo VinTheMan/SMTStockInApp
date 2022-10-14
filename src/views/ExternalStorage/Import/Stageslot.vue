@@ -2,8 +2,19 @@
 
 <template>
   <div>
-    <h1>工單發料明細(Order match result)</h1>
-    <loading v-model:active="isLoading" :is-full-page="true">
+    <h1>{{ selectmsg }}</h1>
+    <br />
+    <input
+      type="file"
+      @change="onChange"
+      accept=".xlsx,.xls,.csv"
+      v-if="!showsend"
+      multiple
+    />
+    <button @click="sendtoweb()" v-if="file !== null" v-show="!showsend">
+      send
+    </button>
+    <loading v-model:active="isLoading" :is-full-page="fullPage">
       <div class="loadingio-spinner-spinner-gmzok6mjj2r">
         <div class="ldio-rh43p65bot">
           <div></div>
@@ -23,24 +34,24 @@
         </div>
       </div>
       <div class="right" v-if="isLoading">
-        <h4><b align="center">工單發料明細載入中，請稍候。</b></h4>
+        <b align="center">料站表匯入中，請稍候。</b>
       </div>
     </loading>
-    <span>當前工單發料單號(Current orders) : </span>
-    <select @change="onChange" class="form-control-sm">
-      <option v-for="worder in Worders" :key="worder">
-        {{ worder }}
-      </option>
-    </select>
-    <br />
-    <br />
 
+    <xlsx-read :file="file"> </xlsx-read>
+    <div class="w-100" style="height: 1ch"></div>
+    <!-- </div>breaks cols to a new line-->
+    <div class="w-100" style="height: 1ch"></div>
+    <!-- </div>breaks cols to a new line-->
     <vue-good-table
       :columns="columns"
       :rows="rows"
       max-height="500px"
       theme="black-rhino"
       :fixed-header="header"
+      :search-options="{
+        enabled: true,
+      }"
       :pagination-options="{
         enabled: true,
         mode: 'records',
@@ -49,7 +60,10 @@
   </div>
 </template>
 
-<script src="../../js/Detail/Worder.ts" lang="ts"></script>
+<script
+  src="../../../js/ExternalStorage/Import/Stageslot.ts"
+  lang="ts"
+></script>
 <style type="text/css">
 @keyframes ldio-rh43p65bot {
   0% {

@@ -15,10 +15,22 @@
       "topic": "Test",
       "as_station": "Work as Station",
       "as_scanner": "Work as Scanner",
-      "qrcode": "generate qrcode",
-      "import": "import xlsx",
+      "qrcode": "generate qrcode"
+    },
+    "Import":{
+      "topic":"ExternalStorage",
+      "outstorehouse": "import External Storehouse",
+      "orderlist" : "import Orderlist",
+      "stageslot" : "import Programming Table"
+    },
+    "Detail":{
       "worderdetail" : "worder detail",
       "storehouse" : "External Storehouse match result"
+    },
+    "Action":{
+      "connect" : "Order connection",
+      "beginmatch" : "Start matching order",
+      "endmatch" : "Stop matching order"
     }
   }
 }

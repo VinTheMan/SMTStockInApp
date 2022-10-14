@@ -1,9 +1,18 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-
+<!-- eslint-disable vue/valid-v-slot -->
 <template>
   <div>
-    <h1>外倉入料明細(ExternalStorehouse match result)</h1>
-    <loading v-model:active="isLoading" :is-full-page="true">
+    <h1>{{ selectmsg }}</h1>
+    <br />
+    <input
+      type="file"
+      @change="onChange"
+      accept=".xlsx, .xls, .csv"
+      v-if="!showsend"
+    />
+    <button @click="sendtoweb()" v-if="file !== null" v-show="!showsend">
+      send
+    </button>
+    <loading v-model:active="isLoading" :is-full-page="fullPage">
       <div class="loadingio-spinner-spinner-gmzok6mjj2r">
         <div class="ldio-rh43p65bot">
           <div></div>
@@ -23,34 +32,37 @@
         </div>
       </div>
       <div class="right" v-if="isLoading">
-        <b align="center">外倉入料明細載入中，請稍候。</b>
+        <b align="center">外倉清單匯入中，請稍候。</b>
       </div>
     </loading>
-    <span>當前外倉入料單號 : {{ storelist }} </span>
 
-    <br />
-    <br />
-
+    <xlsx-read :file="file"> </xlsx-read>
+    <div class="w-100" style="height: 1ch"></div>
+    <!-- </div>breaks cols to a new line-->
+    <div class="w-100" style="height: 1ch"></div>
+    <!-- </div>breaks cols to a new line-->
     <vue-good-table
       :columns="columns"
       :rows="rows"
       max-height="500px"
       theme="black-rhino"
       :fixed-header="header"
+      :search-options="{
+        enabled: true,
+      }"
       :pagination-options="{
         enabled: true,
         mode: 'records',
-      }"
-      :search-options="{
-        enabled: true,
-        searchFn: myFunc,
-        placeholder: '料號(P/N)',
       }"
     ></vue-good-table>
   </div>
 </template>
 
-<script src="../../js/Detail/Storehouse.ts" lang="ts"></script>
+<script
+  src="../../../js/ExternalStorage/Import/Storehouse.ts"
+  lang="ts"
+></script>
+
 <style type="text/css">
 @keyframes ldio-rh43p65bot {
   0% {

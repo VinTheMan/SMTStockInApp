@@ -68,27 +68,62 @@
                                             </router-link>
                                         </li>
 
-                                        <li class="sidebar-item" :class="{active: active_el.includes('test_outstorehouse')||active_el.includes('test_orderlist')||active_el.includes('test_stageslot')}">
-                                            <router-link class="sidebar-link" to="/test/outstorehouse" >
-                                                {{ $t("sidebar.Test.import") }}
+                                    </ul>
+                                </li>
+
+
+                                <li class="sidebar-item" :class="{active: active_el.includes('import')||active_el.includes('detail')}">
+                                    <a data-bs-target="#importexcel" data-bs-toggle="collapse"
+                                        class="sidebar-link collapsed" aria-expanded="false" id="myCollapsible">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-sliders align-middle me-2"
+                                            viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z" />
+                                        </svg>
+                                        <span class="align-middle">{{ $t("sidebar.Import.topic") }}</span>
+                                    </a>
+                                    <ul id="importexcel" class="sidebar-dropdown list-unstyled collapse"
+                                        data-bs-parent="#sidebar">
+
+                                        <li class="sidebar-item" :class="{active: active_el.includes('import_outstorehouse')}" id="storehouse">
+                                            <router-link class="sidebar-link" to="/import/outstorehouse" >
+                                                {{ $t("sidebar.Import.outstorehouse") }}
                                             </router-link>
                                         </li>
 
-                                        <li class="sidebar-item" :class="{active: active_el.includes('test_worderdetail')}">
-                                            <router-link class="sidebar-link" to="/test/worderdetail" >
-                                                {{ $t("sidebar.Test.worderdetail") }}
+                                        <li class="sidebar-item" :class="{active: active_el.includes('import_orderlist')}" id="orderlist">
+                                            <router-link class="sidebar-link" to="/import/orderlist" >
+                                                {{ $t("sidebar.Import.orderlist") }}
                                             </router-link>
                                         </li>
 
-                                        <li class="sidebar-item" :class="{active: active_el.includes('test_storehouse')}">
-                                            <router-link class="sidebar-link" to="/test/storehouse" >
-                                                {{ $t("sidebar.Test.storehouse") }}
+                                        <li class="sidebar-item" :class="{active: active_el.includes('import_stageslot')}" id="stageslot">
+                                            <router-link class="sidebar-link" to="/import/stageslot" >
+                                                {{ $t("sidebar.Import.stageslot") }}
+                                            </router-link>
+                                        </li>
+
+                                        <li class="sidebar-item" :class="{active: active_el.includes('detail_worderdetail')}">
+                                            <router-link class="sidebar-link" to="/detail/worderdetail" >
+                                                {{ $t("sidebar.Detail.worderdetail") }}
+                                            </router-link>
+                                        </li>
+
+                                        <li class="sidebar-item" :class="{active: active_el.includes('detail_storehouse')}">
+                                            <router-link class="sidebar-link" to="/detail/storehouse" >
+                                                {{ $t("sidebar.Detail.storehouse") }}
+                                            </router-link>
+                                        </li>
+
+                                        <li class="sidebar-item" style="display:none" :class="{active: active_el.includes('action_connect')}" id="orderconnect">
+                                            <router-link class="sidebar-link" to="/action/connect" >
+                                                {{ $t("sidebar.Action.connect") }}
                                             </router-link>
                                         </li>
 
                                     </ul>
                                 </li>
-
                                 <!-- <li class="sidebar-item">
                                     <a data-bs-target="#barcodePages" data-bs-toggle="collapse"
                                         class="sidebar-link collapsed" aria-expanded="false">

@@ -7,9 +7,8 @@
     <input
       type="file"
       @change="onChange"
-      accept=".xlsx,.xls,.csv"
+      accept=".xlsx, .xls, .csv"
       v-if="!showsend"
-      multiple
     />
     <button @click="sendtoweb()" v-if="file !== null" v-show="!showsend">
       send
@@ -34,7 +33,7 @@
         </div>
       </div>
       <div class="right" v-if="isLoading">
-        <b align="center">料站表匯入中，請稍候。</b>
+        <b align="center">工單明細匯入中，請稍候。</b>
       </div>
     </loading>
 
@@ -60,7 +59,10 @@
   </div>
 </template>
 
-<script src="../../js/Import/Stageslot.ts" lang="ts"></script>
+<script
+  src="../../../js/ExternalStorage/Import/Orderlist.ts"
+  lang="ts"
+></script>
 <style type="text/css">
 @keyframes ldio-rh43p65bot {
   0% {

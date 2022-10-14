@@ -1,12 +1,10 @@
-import { execFile } from "child_process";
-import { XlsxRead, XlsxSheets, XlsxJson, XlsxTable } from "vue3-xlsx";
+import { XlsxRead } from "vue3-xlsx";
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
 import XLSX from "xlsx";
-import { ref } from "vue";
 // Import the method.
-import { useLoading } from "vue3-loading-overlay";
 import Loading from "vue3-loading-overlay";
+import { GlobalVar } from "../../../../GlobalVar";
 
 // Import stylesheet
 import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
@@ -113,6 +111,7 @@ export default {
       const input: number[] = [];
       const inputroll: number[] = [];
       const box: number[] = [];
+      const worder: string[] = [];
       const alldataarr: (string | number)[][] = [];
 
       const alllength = this.alldata.length;
@@ -148,7 +147,7 @@ export default {
                   .toString()
                   .replace("－", "-");
               }
-              if (this.alldata[i] !== null) {
+              if (this.alldata[i] !== null && this.alldata[i] !== undefined) {
                 outnum[i - 7] = this.alldata[i][0].toString();
                 supplier[i - 7] = this.alldata[i][1].toString();
                 pallet[i - 7] = this.alldata[i][2].toString();
@@ -158,6 +157,7 @@ export default {
                 input[i - 7] = 0;
                 inputroll[i - 7] = 0;
                 box[i - 7] = parseInt(this.alldata[i][6]);
+                worder[i - 7] = "";
               }
             }
 
@@ -170,9 +170,10 @@ export default {
             alldataarr.push(input);
             alldataarr.push(inputroll);
             alldataarr.push(box);
+            alldataarr.push(worder);
 
             await this.axios
-              .post("http://192.168.164.51:8088/api/insertliaohdetail", {
+              .post(GlobalVar.API_URL_DEV + "/insertliaohdetail", {
                 AllData: JSON.stringify(alldataarr),
                 rNo: JSON.stringify(rNo),
               })
@@ -184,10 +185,11 @@ export default {
                   location.reload();
                 } else {
                   sessionStorage.setItem("rNo", rNo);
-                  localStorage.setItem(
+                  sessionStorage.setItem(
                     "storehousedata",
                     JSON.stringify(alldataarr)
                   );
+
                   this.header = true;
                   for (let i = 0; i < outnum.length; i++) {
                     this.rows.push({
@@ -201,8 +203,11 @@ export default {
                     });
                   }
                   this.showsend = true;
-                  this.selectmsg = "請選擇工單明細文件";
-                  //this.$router.push("/test/import1");
+                }
+
+                const connect = document.getElementById("orderconnect");
+                if (connect !== null) {
+                  connect.style.display = "block";
                 }
               })
               .catch((error) => {
@@ -212,6 +217,7 @@ export default {
                 //location.reload();
               });
           } else {
+            this.isLoading = false;
             window.alert(
               "外倉明細匯入失敗。請確認Excel表欄位分別為：出倉號、供應商、棧板號、名碩料號、需求量、數量、箱數"
             );

@@ -165,6 +165,7 @@ export default {
           await this.sendData(alldataarr).then((value) => {
             if (value[0] > 0) {
               client.write("OK;" + "\n" + "Correct");
+              console.log("ok");
             } else if (value[0] === -1) {
               client.write(
                 "D/C SALAH BARCODE" + "\n" + "沒有D/C管控，不能入料"

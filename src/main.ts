@@ -5,6 +5,8 @@ import enUS from "./locales/en-US.json";
 import zhTW from "./locales/zh-TW.json";
 import zhCN from "./locales/zh-CN.json";
 
+import { Store } from "vuex";
+
 import App from "./App.vue";
 
 /* import the fontawesome core */
@@ -42,6 +44,7 @@ createApp({
     app: App,
     "font-awesome-icon": FontAwesomeIcon,
     "admin-template": AdminTemplate,
+    Store,
   },
 })
   .use(i18n)

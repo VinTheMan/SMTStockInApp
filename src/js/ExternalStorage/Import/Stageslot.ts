@@ -1,16 +1,13 @@
-import { execFile } from "child_process";
-import { XlsxRead, XlsxSheets, XlsxJson, XlsxTable } from "vue3-xlsx";
+import { XlsxRead } from "vue3-xlsx";
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
 import XLSX from "xlsx";
-import { ref } from "vue";
 // Import the method.
-import { useLoading } from "vue3-loading-overlay";
 import Loading from "vue3-loading-overlay";
+import { GlobalVar } from "../../../../GlobalVar";
 
 // Import stylesheet
 import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
-import { exit } from "process";
 export default {
   components: {
     XlsxRead,
@@ -98,6 +95,12 @@ export default {
   },
   mounted() {
     console.log("mount");
+    if (sessionStorage.getItem("rNo") !== undefined) {
+      const storehouse = document.getElementById("storehouse");
+      if (storehouse !== null) {
+        storehouse.style.display = "none";
+      }
+    }
   },
   //this.alldata[file][sheetindex][row][column]
   methods: {
@@ -186,7 +189,6 @@ export default {
         for (let i = 0; i < this.alldata[a].length; i++) {
           if (i !== this.nameindex[a]) {
             const row = this.alldata[a][i][4];
-            console.log(row);
             if (
               row !== undefined &&
               row.length > 0 &&
@@ -266,8 +268,6 @@ export default {
                   break;
                 } else {
                   if (typeof this.alldata[a][i][j][this.index] === "number") {
-                    console.log(this.worderqty[a]);
-                    console.log(this.alldata[a][i][j][this.index]);
                     this.qty =
                       (this.worderqty[a] * this.alldata[a][i][j][this.index]) /
                       this.divide /
@@ -298,15 +298,15 @@ export default {
               this.prestageslot = this.stageslot;
 
               alldataarr[a].push({
-                worder: this.worder[a],
-                virtualworder: this.virtualworder[a],
-                name: this.name[a][i],
-                stageslot: this.stageslot,
-                pn: this.pn,
-                rqty: this.qty,
-                total: 0,
-                wqty: 0,
-                receiveqty: 0,
+                Worder: this.worder[a],
+                VirtualWorder: this.virtualworder[a],
+                Name: this.name[a][i],
+                StageSlot: this.stageslot,
+                PN: this.pn,
+                rQty: this.qty,
+                Total: 0,
+                wQty: 0,
+                ReceivedQty: 0,
               });
             } //for
           }
@@ -322,11 +322,11 @@ export default {
         this.qty = 0;
       }
 
-      console.log(alldataarr);
       console.log(this.virtualworder);
       console.log(this.orders);
+      console.log(alldataarr);
       await this.axios
-        .post("http://192.168.164.51:8088/api/checkworder", {
+        .post(GlobalVar.API_URL_DEV + "/checkworder", {
           worder: JSON.stringify(this.virtualworder),
           order: JSON.stringify(this.orders),
           Alldata: JSON.stringify(alldataarr),
@@ -335,29 +335,55 @@ export default {
           // loader.hide();
           this.isLoading = false;
           if (response.data[0][0] !== 0) {
-            location.reload();
+            for (let i = 0; i < this.virtualworder.length; i++) {
+              if (this.virtualworder[i] === response.data[1]) {
+                window.alert(
+                  "料站表:" +
+                    this.filename[i] +
+                    "中工單已完成過工單排序，需要再次導入請找工程師處理."
+                );
+              }
+            }
           } else {
-            window.alert(response.data[0][1]);
-
+            if (response.data[0][2].length > 0) {
+              let temp = "";
+              for (let i = 0; i < response.data[0][2].length; i++) {
+                temp = temp + response.data[0][2][i] + "\n";
+              }
+              window.alert(
+                response.data[0][1] +
+                  "\n" +
+                  "料站表：如下工單無程式料表，無法執行工單分料" +
+                  "\n" +
+                  temp
+              );
+            } else {
+              window.alert(response.data[0][1]);
+            }
             const filelength = response.data[1].length;
             for (let i = 0; i < filelength; i++) {
               const datalength = response.data[1][i].length;
               for (let j = 0; j < datalength; j++) {
                 this.rows.push({
-                  worder: response.data[1][i][j].worder,
-                  virtualworder: response.data[1][i][j].virtualworder,
-                  name: response.data[1][i][j].name,
-                  stageslot: response.data[1][i][j].stageslot,
-                  pn: response.data[1][i][j].pn,
-                  rqty: response.data[1][i][j].rqty,
-                  total: response.data[1][i][j].total,
-                  wqty: response.data[1][i][j].wqty,
-                  receiveqty: response.data[1][i][j].receiveqty,
+                  worder: response.data[1][i][j].Worder,
+                  virtualworder: response.data[1][i][j].VirtualWorder,
+                  name: response.data[1][i][j].Name,
+                  stageslot: response.data[1][i][j].StageSlot,
+                  pn: response.data[1][i][j].PN,
+                  rqty: response.data[1][i][j].rQty,
+                  total: response.data[1][i][j].Total,
+                  wqty: response.data[1][i][j].wQty,
+                  receiveqty: response.data[1][i][j].ReceivedQty,
                 });
               }
             }
           }
           this.header = true;
+          this.showsend = true;
+          sessionStorage.setItem(
+            "programming table",
+            JSON.stringify(this.rows)
+          );
         })
         .catch((error) => {
           this.errorMessage = error.message;

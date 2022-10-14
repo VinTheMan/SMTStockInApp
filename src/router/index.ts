@@ -50,51 +50,70 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/QrCodeview.vue"),
   },
   {
-    path: "/test/outstorehouse",
-    name: "test_outstorehouse",
+    path: "/import/outstorehouse",
+    name: "import_outstorehouse",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(
-        /* webpackChunkName: "about" */ "../views/Import/OutStorehouse.vue"
+        /* webpackChunkName: "about" */ "../views/ExternalStorage/Import/OutStorehouse.vue"
       ),
   },
   {
-    path: "/test/orderlist",
-    name: "test_orderlist",
+    path: "/import/orderlist",
+    name: "import_orderlist",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Import/Orderlist.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../views/ExternalStorage/Import/Orderlist.vue"
+      ),
   },
   {
-    path: "/test/stageslot",
-    name: "test_stageslot",
+    path: "/import/stageslot",
+    name: "import_stageslot",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Import/Stageslot.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../views/ExternalStorage/Import/Stageslot.vue"
+      ),
   },
   {
-    path: "/test/worderdetail",
-    name: "test_worderdetail",
+    path: "/detail/worderdetail",
+    name: "detail_worderdetail",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Detail/Worder.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../views/ExternalStorage/Detail/Worder.vue"
+      ),
   },
   {
-    path: "/test/storehouse",
-    name: "test_storehouse",
+    path: "/detail/storehouse",
+    name: "detail_storehouse",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Detail/Storehouse.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../views/ExternalStorage/Detail/Storehouse.vue"
+      ),
+  },
+  {
+    path: "/action/connect",
+    name: "action_connect",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/ExternalStorage/Action/Connection.vue"
+      ),
   },
   {
     path: "/:pathMatch(.*)*",

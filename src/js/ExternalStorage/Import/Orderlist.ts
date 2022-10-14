@@ -1,12 +1,10 @@
-import { execFile } from "child_process";
-import { XlsxRead, XlsxSheets, XlsxJson, XlsxTable } from "vue3-xlsx";
+import { XlsxRead } from "vue3-xlsx";
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
 import XLSX from "xlsx";
-import { ref } from "vue";
 // Import the method.
-import { useLoading } from "vue3-loading-overlay";
 import Loading from "vue3-loading-overlay";
+import { GlobalVar } from "../../../../GlobalVar";
 
 // Import stylesheet
 
@@ -53,6 +51,12 @@ export default {
   },
   mounted() {
     console.log("mount");
+    if (sessionStorage.getItem("rNo") !== undefined) {
+      const storehouse = document.getElementById("storehouse");
+      if (storehouse !== null) {
+        storehouse.style.display = "none";
+      }
+    }
   },
   methods: {
     onChange(event) {
@@ -85,7 +89,7 @@ export default {
       const alllength = this.alldata.length;
 
       if (
-        this.alldata[0] !== undefined &&
+        this.alldata[0][0] !== undefined &&
         this.alldata[0][0].toString().toLowerCase() === "order" &&
         this.alldata[0][1].toString().toLowerCase() === "material"
       ) {
@@ -114,11 +118,12 @@ export default {
         alldataarr.push(rqty);
 
         await this.axios
-          .post("http://192.168.164.51:8088/api/insertorderlist", {
+          .post(GlobalVar.API_URL_DEV + "/insertorderlist", {
             AllData: JSON.stringify(alldataarr),
           })
           .then((response) => {
             this.isLoading = false;
+            console.log(response.data);
             if (response.data[0] !== 0) {
               window.alert(
                 "讀取第" +
@@ -140,12 +145,22 @@ export default {
                   amount: 0,
                 });
               }
-              window.alert(response.data[1]);
+              if (response.data[2].length > 0) {
+                let temp = "";
+                for (let i = 0; i < response.data[2].length; i++) {
+                  temp = temp + response.data[2][i] + "\n";
+                }
+                window.alert(
+                  response.data[1] +
+                    "\n" +
+                    "工單分料：如下工單無程式料表，無法執行工單分料" +
+                    "\n" +
+                    temp
+                );
+              } else {
+                window.alert(response.data[1]);
+              }
               this.showsend = true;
-              //   this.index += 1;
-              //   this.selectmsg = "請選擇工單發料明細";
-              //this.$router.push("/test/import1");
-              this.selectmsg = "請選擇料站表文件";
             }
           })
           .catch((error) => {
@@ -155,8 +170,9 @@ export default {
             //location.reload();
           });
       } else {
+        this.isLoading = false;
         window.alert("請確認是否為正確的工單發料明細");
-        return false;
+        location.reload();
       }
     },
   },

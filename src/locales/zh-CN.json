@@ -15,10 +15,22 @@
       "topic": "测试模块",
       "as_station": "以本程式作为工作站",
       "as_scanner": "以本程式作为分拣机/PDA",
-      "qrcode": "產生qrcode",
-      "import" : "上传档案",
+      "qrcode": "產生qrcode"
+    },
+    "Import":{
+      "topic":"码头分工单",
+      "outstorehouse" : "汇入外仓来料",
+      "orderlist" : "汇入工单明细",
+      "stageslot" : "汇入料站表"
+    },
+    "Detail":{
       "worderdetail" : "工单发料明细",
       "storehouse" : "外仓入料明细"
+    },
+    "Action":{
+      "connect" : "工单绑定",
+      "beginmatch" : "开始入料",
+      "endmatch" : "结束入料"
     }
   }
 }

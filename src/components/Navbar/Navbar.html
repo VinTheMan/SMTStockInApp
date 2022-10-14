@@ -3,6 +3,8 @@
         <i class="hamburger align-self-center"></i>
     </a>
 
+
+
     <form class="d-none d-sm-inline-block">
         <div class="input-group input-group-navbar">
             <input type="text" class="form-control" placeholder="Search…" aria-label="Search">
@@ -16,6 +18,67 @@
             </button>
         </div>
     </form>
+
+    <div class="row justify-content-center">
+        <div style="text-align: center">
+            <!-- <button class="btn-info btn-lg col-auto" @click="showqrcode()">
+                            動作(Action)
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="dropdown show-dropdown" id="action" style="display:none">123</div> -->
+            <!-- Example single danger button -->
+            <!-- <div class="btn-group">
+                <button type="button" class="btn btn-lg btn-info dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    動作(Action)
+                </button>
+                <div class="dropdown-menu" style="min-width:30ch">
+                    <div style="text-align: center">
+                        <label class="dropdown">伺服器匹配二維碼</label>
+                        <Qrcodeger :value="address + ':' + port" :size="100">
+                        </Qrcodeger>
+
+                        <button type="button" class="btn btn-sm btn-success dropdown-item">begin</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-item">end</button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle btn btn-info" id="actionbutton" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 20ch;">
+                            動作(Action)
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink"
+                            style="min-width: 20ch;">
+                            <div style="text-align: center">
+                                <label>伺服器匹配二維碼</label>
+                                <div class="dropdown-divider"></div>
+                                <span>服務器IP:</span>
+                                <input type="text" v-model="address" id="address" @input="forceRerender" />
+                                <div class="dropdown-divider"></div>
+                                <span>服務器Port:</span>
+                                <input type="text" v-model="port" id="port" @input="forceRerender" />
+                                <div class="dropdown-divider"></div>
+                                <Qrcodeger :value="address + ':' + port" :size="150">
+                                </Qrcodeger>
+                                <div class="dropdown-divider"></div>
+                                <button type="button" class="btn btn-lg btn-success">開始入料</button>
+                                <div class="dropdown-divider"></div>
+                                <button type="button" class="btn btn-lg btn-danger">結束入料</button>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">

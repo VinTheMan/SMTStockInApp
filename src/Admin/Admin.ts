@@ -69,6 +69,12 @@ export default {
   },
   mounted() {
     // do nothing for now
+    if (sessionStorage.getItem("rNo") !== null) {
+      const connect = document.getElementById("orderconnect");
+      if (connect !== null) {
+        connect.style.display = "block";
+      }
+    }
   },
   components: {
     SidebarComponent,
